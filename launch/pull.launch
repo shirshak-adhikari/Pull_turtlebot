@@ -1,0 +1,12 @@
+
+<launch>
+  <arg name="robot_num" default="1"/>
+
+<group ns="$(eval 'node' + str(arg('robot_num')))">
+    <node name = "robot_pull" pkg="pull_turtlebot" type="test.py" output="screen"/>
+</group>
+
+<include file ="$(find pull_turtlebot)/launch/pull.launch" if="$(eval arg('robot_num') - 1 > 0)">
+  <arg name="robot_num" value="$(eval arg('robot_num')-1)"/>
+</include>
+</launch>
